@@ -7,7 +7,7 @@ function Page({ title, children }) {
     <Container>
       <Row className="p-3">
         <Col className="justify-self-start" md={12}>
-          <h3 className="display-4 text-center">{title}</h3>
+          <h3 className="display-4 text-center mb-4">{title}</h3>
         </Col>
         <Col md={12}>
           {children}
