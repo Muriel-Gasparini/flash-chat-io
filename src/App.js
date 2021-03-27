@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { MenuNavBar } from './components/menu/nav-bar';
-import { getRoutes } from './routes';
+import { MenuNavBar } from './components/menu/nav-bar'
+import { getRoutes } from './routes'
 
 function App() {
   return (
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
