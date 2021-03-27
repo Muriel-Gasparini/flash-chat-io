@@ -6,7 +6,7 @@ import { Page } from '../../components/page/page'
 
 function SignIn() {
   return (
-    <Page title="Faça o Login no FlashChat">
+    <Page title="Faça Login no FlashChat">
       <Jumbotron>
         <Form>
           <Row className="justify-content-center">
@@ -28,7 +28,7 @@ function SignIn() {
             </Col>
           </Row>
           <Row className="justify-content-center">
-            <Button className="mt-3" size="lg">Logar</Button>
+            <Button className="mt-3" size="md">Logar</Button>
           </Row>
         </Form>
       </Jumbotron>

@@ -47,7 +47,7 @@ function SignUp() {
             </Col>
           </Row>
           <Row className="justify-content-center">
-            <Button className="mt-3" size="lg">Criar Conta</Button>
+            <Button className="mt-3" size="md">Criar Conta</Button>
           </Row>
         </Form>
       </Jumbotron>
