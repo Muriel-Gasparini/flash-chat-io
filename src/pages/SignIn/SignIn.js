@@ -4,19 +4,12 @@ import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
 import { InputWithLabel } from '../../components/Form/InputWithLabel'
 import { Page } from '../../components/page/page'
 
-function SignUp() {
+function SignIn() {
   return (
-    <Page title="Cadastre-se no FlashChat">
+    <Page title="Faça Login no FlashChat">
       <Jumbotron>
         <Form>
-          <Row>
-            <Col md={6}>
-              <InputWithLabel
-                label="Nome"
-                placeholder="Nome"
-                inputType="Text"
-              />
-            </Col>
+          <Row className="justify-content-center">
             <Col md={6}>
               <InputWithLabel
                 label="Email"
@@ -24,13 +17,8 @@ function SignUp() {
                 inputType="Email"
               />
             </Col>
-            <Col md={12}>
-              <InputWithLabel
-                label="Data de Nascimento"
-                placeholder="Data de Nascimento"
-                inputType="Date"
-              />
-            </Col>
+          </Row>
+          <Row className="justify-content-center">
             <Col md={6}>
               <InputWithLabel
                 label="Senha"
@@ -38,16 +26,9 @@ function SignUp() {
                 inputType="Password"
               />
             </Col>
-            <Col md={6}>
-              <InputWithLabel
-                label="Confirmar Senha"
-                placeholder="Confirmar senha"
-                inputType="Password"
-              />
-            </Col>
           </Row>
           <Row className="justify-content-center">
-            <Button className="mt-3" size="md">Criar Conta</Button>
+            <Button className="mt-3" size="md">Logar</Button>
           </Row>
         </Form>
       </Jumbotron>
@@ -55,4 +36,4 @@ function SignUp() {
   )
 }
 
-export { SignUp }
+export { SignIn }
