@@ -8,7 +8,7 @@
     "react-scripts": "4.0.3"
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
+    "eslint": "^7.22.0",
     "eslint-plugin-react": "^7.23.1",
     "node-sass-chokidar": "^1.5.0"
   },

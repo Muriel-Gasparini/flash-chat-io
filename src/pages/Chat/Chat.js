@@ -1,92 +1,60 @@
 import React from 'react'
-import { Row, Col, Container, Button, Navbar, Form } from 'react-bootstrap'
+import { Row, Col, Container, Button, ListGroup, Image, } from 'react-bootstrap'
+import { InputWithLabel } from '../../components/Form/InputWithLabel'
+
+import { Page } from '../../components/page/page'
 import '../../styles/chat.css'
+import UserProfileImage from '../../images/icon-256x256.png'
 function Chat() {
+
+	const mockChat = [
+		(
+			<ul className='list-unstyled' key={0}>
+				<li>
+					<h3 className='text-success'>User</h3>
+				</li>
+				<p>Mensagem do usuário</p>
+				<li>
+					<h3 className='text-success'>User</h3>
+				</li>
+				<p>Mensagem do usuário</p>
+
+			</ul>
+		)
+	]
+
 	return (
-		<>
-			<div
-				className='bg-light page'
-				style={{ height: '90vh', overflowX: 'hidden', overflowY: 'hidden' }}
-			>
-				<Row>
-					<Col>
-						<Container>
-							<div className='d-flex align-items-center justify-content-between position-fixed'>
-								<h3 className='text-center py-3 d-inline'>
-									Flash Chat
-								</h3>
-							</div>
-						</Container>
-					</Col>
-				</Row>
-				<Row>
-					<Col>
-						<Container>
-							<div className='d-flex align-items-center justify-content-between right'>
-								<ul className='list-unstyled'>
-									<li>
-										<h3 className='text-success'>User</h3>
-									</li>
-									<p>Mensagem do usuário</p>
-									<li>
-										<h3 className='text-success'>User</h3>
-									</li>
-									<p>Mensagem do usuário</p>
-
-									<li>
-										<h3>User</h3>
-									</li>
-									<p>Mensagem do usuário</p>
-									<li>
-										<h3>User</h3>
-									</li>
-									<p>Mensagem do usuário</p>
-									<li>
-										User
-										</li>
-									<p>Mensagem do usuário</p>
-									<li>
-										User
-										</li>
-									<p>Mensagem do usuário</p>
-									<p>Mensagem do usuário</p>
-									<li>
-										User
-										</li>
-									<p>Mensagem do usuário</p>
-									<p>Mensagem do usuário</p>
-									<li>
-										User
-										</li>
-									<p>Mensagem do usuário</p>
-								</ul>
-
-							</div>
-						</Container>
-					</Col>
-				</Row>
-				<Navbar fixed='bottom'>
+		<Page title="FlashChat">
+			<Row className='bg-light page overflow-auto'
+				style={{ height: '50vh', overflowX: 'hidden' }}>
+				<Col>
 					<Container className=''>
-						<Form
-							inline
-							className='w-100 d-flex justify-content-between align-items-center'
-						>
-							<Form.Group style={{ flex: 1 }}>
-								<Form.Control
-									style={{ width: '100%' }}
-									required
-									type='text'
-									placeholder='Type Message here...'
-								/>
-							</Form.Group>
-							<Button variant='primary' type='submit'>
-								Send
-							</Button>
-						</Form>
+						{mockChat}
+						<ListGroup className="d-flex align-items justify-content-between">
+							<Row>
+								<Col>
+									<Image src={UserProfileImage} alt="Profile Image" roundedCircle />
+								</Col>
+							</Row>
+							<ListGroup.Item>
+								User
+						</ListGroup.Item>
+							<p>Mensagem</p>
+						</ListGroup>
 					</Container>
-				</Navbar>
-			</div>
-		</>
+				</Col>
+			</Row>
+			<Row className="align-items-center">
+				<Col md={10}>
+					<InputWithLabel placeholder="Type message here" type="text" style={{ fixed: 'bottom' }} />
+				</Col>
+				<Col md={2}>
+					<Button variant='primary' type='submit' size="md">
+						Send
+				</Button>
+				</Col>
+			</Row>
+		</Page>
 	);
 }
 
