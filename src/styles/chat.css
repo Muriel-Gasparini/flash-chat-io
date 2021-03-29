@@ -1,0 +1,11 @@
+.right { 
+    margin-top: 8.3%;
+    width: 70%;
+    position:fixed;
+    top:5px;
+    overflow-y:auto;
+    height: 70%
+}
+.content {
+    height: 100%;
+  }

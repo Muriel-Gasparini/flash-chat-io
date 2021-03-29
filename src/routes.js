@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { HomePage } from './pages/Home/Home'
 import { SignUp } from './pages/SignUp/SignUp'
 import { SignIn } from './pages/SignIn/SignIn'
+import { Chat } from './pages/Chat/Chat'
 
 function getRoute(path, component) {
   return (
@@ -25,7 +26,8 @@ function getRoutes() {
 
 const ALL_ROUTES = [
   getRoute('/sign-up', SignUp),
-  getRoute('/sign-in', SignIn)
+  getRoute('/sign-in', SignIn),
+  getRoute('/chat', Chat)
 ]
 
 export { getRoutes }
