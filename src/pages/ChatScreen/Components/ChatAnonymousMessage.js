@@ -1,8 +1,7 @@
 import React from 'react'
 import { Card, Col, Image, Row } from 'react-bootstrap'
 
-function ChatAnonymousMessage({ userName, message, eventKey }) {
-  console.log(eventKey)
+function ChatAnonymousMessage({ userName, message }) {
   return (
     <Col className="ml-2 mb-3 pr-5">
       <Row className="flex-nowrap">

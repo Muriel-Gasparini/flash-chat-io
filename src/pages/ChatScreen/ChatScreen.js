@@ -5,13 +5,13 @@ import { Page } from '../../Components/Page/Page'
 import { ChatAnonymousMessage } from './Components/ChatAnonymousMessage'
 import { ChatUserMessage } from './Components/ChatUserMessage'
 
-function renderMessage(id, userName, messageType, message) {
+function renderMessage(messageIndex, userName, messageType, message) {
 
   switch (messageType) {
     case 'anonymous':
-      return <ChatAnonymousMessage eventKey={id} message={message} />
+      return <ChatAnonymousMessage key={messageIndex} message={message} />
     case 'user':
-      return <ChatUserMessage eventKey={id} userName={userName} message={message} />
+      return <ChatUserMessage key={messageIndex} userName={userName} message={message} />
   }
 }
 
