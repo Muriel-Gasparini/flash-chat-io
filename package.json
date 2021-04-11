@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "yarn watch-css && react-scripts start",
-    "watch-css": "node-sass-chokidar --include-path ./src/styles --watch --recursive",
+    "watch-css": "node-sass-chokidar --output-style compressed ./src/styles/App.scss > ./src/styles/App.css",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

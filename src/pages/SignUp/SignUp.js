@@ -1,8 +1,8 @@
 import React from 'react'
 import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
 
-import { InputWithLabel } from '../../components/Form/InputWithLabel'
-import { Page } from '../../components/page/page'
+import { InputWithLabel } from '../../Components/Form/InputWithLabel'
+import { Page } from '../../Components/Page/Page'
 
 function SignUp() {
   return (
