@@ -1,6 +1,7 @@
 import React from 'react'
 import { Jumbotron, Row, Button } from 'react-bootstrap'
-import { Page } from '../../components/page/page'
+
+import { Page } from '../../Components/Page/Page'
 
 function HomePage() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { MenuNavBar } from './components/menu/nav-bar'
+import { MenuNavBar } from './Components/Menu/NavBar'
 import { getRoutes } from './routes'
 
 function App() {

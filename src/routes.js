@@ -1,31 +1,33 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import { HomePage } from './pages/Home/Home'
-import { SignUp } from './pages/SignUp/SignUp'
-import { SignIn } from './pages/SignIn/SignIn'
+import { HomePage } from './Pages/Home/Home'
+import { SignUp } from './Pages/SignUp/SignUp'
+import { SignIn } from './Pages/SignIn/SignIn'
+import { ChatScreen } from './Pages/ChatScreen/ChatScreen'
 
-function getRoute(path, component) {
-  return (
-    <Route path={path}>
-      {component}
-    </Route>
-  )
-}
+const ALL_ROUTES = [
+  { path: '/', component: <HomePage />},
+  { path: '/sign-up', component: <SignUp />},
+  { path: '/sign-in', component: <SignIn />},
+  { path: '/chat', component: <ChatScreen />}
+]
 
 function getRoutes() {
   return (
     <Router>
       <Switch>
-        {[ALL_ROUTES, getRoute('/', HomePage)]}
+        { ALL_ROUTES.map((x, i) => {
+            return (
+              <Route key={i} path={x.path}>
+                {x.component}
+              </Route>
+            )
+          }).reverse() 
+        }
       </Switch>
     </Router>
   )
 }
-
-const ALL_ROUTES = [
-  getRoute('/sign-up', SignUp),
-  getRoute('/sign-in', SignIn)
-]
 
 export { getRoutes }
