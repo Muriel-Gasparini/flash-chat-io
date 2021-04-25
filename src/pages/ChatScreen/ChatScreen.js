@@ -38,7 +38,7 @@ function ChatScreen() {
         </Col>
       </Row>
       <InputGroup className="mb-3">
-        <FormControl placeholder="Digite sua mensagem" className="mr-2"/>
+        <FormControl placeholder="Digite sua mensagem" className="mr-2" />
         <Button>Enviar</Button>
       </InputGroup>
     </Page>

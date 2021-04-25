@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormGroup, FormLabel } from 'react-bootstrap'
 
-function InputWithLabel({ label, placeholder, onChange, inputType }) {
+function InputWithLabel({ label, placeholder, onChange, inputType, required, min, max }) {
   return (
     <FormGroup>
       <FormLabel>{label}</FormLabel>
@@ -10,6 +10,9 @@ function InputWithLabel({ label, placeholder, onChange, inputType }) {
         placeholder={placeholder}
         type={inputType}
         onChange={onChange}
+        required={required}
+        max={max}
+        min={min}
       />
     </FormGroup>
   )
