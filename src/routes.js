@@ -7,21 +7,19 @@ import { SignIn } from './Pages/SignIn/SignIn'
 import { ChatScreen } from './Pages/ChatScreen/ChatScreen'
 
 const ALL_ROUTES = [
-  { path: '/', component: <HomePage />},
-  { path: '/sign-up', component: <SignUp />},
-  { path: '/sign-in', component: <SignIn />},
-  { path: '/chat', component: <ChatScreen />}
+  { path: '/', component: HomePage},
+  { path: '/sign-up', component: SignUp},
+  { path: '/sign-in', component: SignIn},
+  { path: '/chat', component: ChatScreen}
 ]
 
-function getRoutes() {
+function getRoutes(props) {
   return (
     <Router>
       <Switch>
         { ALL_ROUTES.map((x, i) => {
             return (
-              <Route key={i} path={x.path}>
-                {x.component}
-              </Route>
+              <Route key={i} path={x.path} component={x.component} {...props}/>
             )
           }).reverse() 
         }
