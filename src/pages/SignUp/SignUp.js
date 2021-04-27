@@ -84,9 +84,9 @@ function SignUp({ history }) {
               />
             </Col>
           </Row>
-          <Row className="justify-content-center">
+          <Row className="justify-content-center mt-5">
             {
-              isLoading ? <Spinner variant="dark" /> :
+              isLoading ? <Spinner variant="dark" animation="border" /> :
                 <Button type="submit" className="mt-3" size="md">Criar Conta</Button>
             }
           </Row>

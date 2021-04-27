@@ -10,9 +10,7 @@ class HttpService {
           resolve(response.data)
         }, error => {
           console.log('ERROR', error)
-          if (new RegExp('400').test(error)) {
-            reject(new Error('Verifique os dados enviados'))
-          }
+          reject(new Error(error.response.data?.error || 'Verifique os dados enviados'))
         })
     })
   }
