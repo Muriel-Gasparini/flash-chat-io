@@ -22,7 +22,6 @@ function AuthProvider({ children }) {
 }
 
 export const useAuth = () => {
-  console.log("salve da angola", useContext(AuthUserContext))
   return useContext(AuthUserContext)
 }
 
