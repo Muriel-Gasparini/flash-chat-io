@@ -1,20 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
 
 import { InputWithLabel } from '../../Components/Form/InputWithLabel'
+import { Loading } from '../../Components/Loading/Loading'
+import { Notify } from '../../Components/Notify/Notify'
 import { Page } from '../../Components/Page/Page'
+import { LocalStorage } from '../../Services/LocalStorageService'
+import { makeSignService } from '../../Services/SignInService'
+import { useAuth } from './SignInContext'
 
-function SignIn() {
+const signInService = makeSignService()
+
+export const ACCESS_TOKEN_KEY = 'USER_TOKEN'
+
+function SignIn({ history }) {
+
+  const [credentials, setCredentials] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+
+  const { setIsAuthenticated } = useAuth()
+
+  const doLogin = async event => {
+    event.preventDefault()
+    try {
+      setIsLoading(true)
+
+      const { token } = await signInService.login(credentials)
+      LocalStorage.setItem(ACCESS_TOKEN_KEY, token)
+
+      setIsAuthenticated(true)
+
+      Notify.success('Login realizado com sucesso!')
+      history.push('/chat')
+    } catch (error) {
+      Notify.error(error.toString())
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <Page title="Faça Login no FlashChat">
       <Jumbotron>
-        <Form>
+        <Form onSubmit={doLogin}>
           <Row className="justify-content-center">
             <Col md={6}>
               <InputWithLabel
                 label="Email"
                 placeholder="email@email.com"
                 inputType="Email"
+                required
+                onChange={e => {
+                  credentials.email = e.target.value
+                  setCredentials(credentials)
+                }}
               />
             </Col>
           </Row>
@@ -24,11 +63,18 @@ function SignIn() {
                 label="Senha"
                 placeholder="Senha"
                 inputType="Password"
+                required
+                onChange={e => {
+                  credentials.password = e.target.value
+                  setCredentials(credentials)
+                }}
               />
             </Col>
           </Row>
           <Row className="justify-content-center">
-            <Button className="mt-3" size="md">Logar</Button>
+            <Loading isLoading={isLoading}>
+              <Button type="submit" className="mt-3" size="md">Logar</Button>
+            </Loading>
           </Row>
         </Form>
       </Jumbotron>
