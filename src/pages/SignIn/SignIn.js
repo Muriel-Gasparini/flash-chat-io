@@ -73,7 +73,7 @@ function SignIn({ history }) {
           </Row>
           <Row className="justify-content-center">
             <Loading isLoading={isLoading}>
-              <Button type="submit" className="mt-3" size="md">Logar</Button>
+              <Button type="submit" variant="dark" className="mt-3" size="md">Logar</Button>
             </Loading>
           </Row>
         </Form>

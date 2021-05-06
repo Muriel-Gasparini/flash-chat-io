@@ -7,6 +7,10 @@ class LocalStorage {
   static getItem(name) {
     return localStorage.getItem(name)
   }
+
+  static removeItem(name) {
+    localStorage.removeItem(name)
+  }
 }
 
 export { LocalStorage }
