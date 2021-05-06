@@ -2,17 +2,13 @@ import axios from 'axios'
 
 class HttpService {
 
-  makeRequest(url, method, body = null) {
-    return new Promise((resolve, reject) => {
-      axios[method](url, body)
-        .then(response => {
-          console.log("RESPONSE", response)
-          resolve(response.data)
-        }, error => {
-          console.log('ERROR', error)
-          reject(new Error(error.response.data?.error || 'Verifique os dados enviados'))
-        })
-    })
+  async makeRequest(url, method, body = null) {
+    try {
+      const response = await axios[method](url, body)
+      return response.data
+    } catch (error) {
+      throw new Error(error.response?.data?.error || 'Verifique os dados enviados')
+    }
   }
 
   async post(url, body) {
