@@ -1,8 +1,9 @@
 import moment from 'moment'
 import React, { useState } from 'react'
-import { Button, Col, Form, Jumbotron, Row, Spinner } from 'react-bootstrap'
+import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
 
 import { InputWithLabel } from '../../Components/Form/InputWithLabel'
+import { Loading } from '../../Components/Loading/Loading'
 import { Notify } from '../../Components/Notify/Notify'
 import { Page } from '../../Components/Page/Page'
 import { SignUpService } from '../../Services/SignUpService'
@@ -85,10 +86,9 @@ function SignUp({ history }) {
             </Col>
           </Row>
           <Row className="justify-content-center mt-5">
-            {
-              isLoading ? <Spinner variant="dark" animation="border" /> :
-                <Button type="submit" className="mt-3" size="md">Criar Conta</Button>
-            }
+            <Loading isLoading={isLoading}>
+              <Button type="submit" variant="dark" className="mt-3" size="md">Criar Conta</Button>
+            </Loading>
           </Row>
         </Form>
       </Jumbotron>
