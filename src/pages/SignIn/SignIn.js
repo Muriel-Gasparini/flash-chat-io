@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
+import axios from 'axios'
 
 import { InputWithLabel } from '../../Components/Form/InputWithLabel'
 import { Loading } from '../../Components/Loading/Loading'
@@ -24,6 +25,12 @@ function SignIn({ history }) {
       setIsLoading(true)
 
       const { token } = await signInService.login(credentials)
+
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      const userData = await signInService.getUserInformation();
+
+      LocalStorage.setJSONItem(SignInService.USER_DATA_KEY, userData)
       LocalStorage.setItem(SignInService.ACCESS_TOKEN_KEY, token)
 
       setIsAuthenticated(true)
