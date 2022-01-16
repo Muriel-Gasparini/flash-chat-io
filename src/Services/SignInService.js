@@ -4,6 +4,8 @@ class SignInService extends BaseService {
 
   baseUrl = 'http://localhost:3001/sign-in'
 
+  static ACCESS_TOKEN_KEY = "USER_TOKEN"
+
   async login(credentials) {
     return await this.getHttpRequest().post(this.getBaseUrl(), credentials)
   }

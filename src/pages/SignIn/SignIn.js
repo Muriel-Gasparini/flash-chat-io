@@ -6,12 +6,10 @@ import { Loading } from '../../Components/Loading/Loading'
 import { Notify } from '../../Components/Notify/Notify'
 import { Page } from '../../Components/Page/Page'
 import { LocalStorage } from '../../Services/LocalStorageService'
-import { makeSignService } from '../../Services/SignInService'
+import { makeSignService, SignInService } from '../../Services/SignInService'
 import { useAuth } from './SignInContext'
 
 const signInService = makeSignService()
-
-export const ACCESS_TOKEN_KEY = 'USER_TOKEN'
 
 function SignIn({ history }) {
 
@@ -26,7 +24,7 @@ function SignIn({ history }) {
       setIsLoading(true)
 
       const { token } = await signInService.login(credentials)
-      LocalStorage.setItem(ACCESS_TOKEN_KEY, token)
+      LocalStorage.setItem(SignInService.ACCESS_TOKEN_KEY, token)
 
       setIsAuthenticated(true)
 
@@ -50,10 +48,7 @@ function SignIn({ history }) {
                 placeholder="email@email.com"
                 inputType="Email"
                 required
-                onChange={e => {
-                  credentials.email = e.target.value
-                  setCredentials(credentials)
-                }}
+                onChange={e => setCredentials({...credentials, email: e.target.value })}
               />
             </Col>
           </Row>
@@ -64,10 +59,7 @@ function SignIn({ history }) {
                 placeholder="Senha"
                 inputType="Password"
                 required
-                onChange={e => {
-                  credentials.password = e.target.value
-                  setCredentials(credentials)
-                }}
+                onChange={e => setCredentials({...credentials, password: e.target.value })}
               />
             </Col>
           </Row>

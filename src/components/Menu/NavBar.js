@@ -1,9 +1,9 @@
 import React from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 
-import { ACCESS_TOKEN_KEY } from '../../Pages/SignIn/SignIn'
 import { useAuth } from '../../Pages/SignIn/SignInContext'
 import { LocalStorage } from '../../Services/LocalStorageService'
+import { SignInService } from '../../Services/SignInService'
 
 function MenuNavBar() {
 
@@ -15,7 +15,7 @@ function MenuNavBar() {
 
   const signOut = () => {
     window.location.pathname = '/'
-    LocalStorage.removeItem(ACCESS_TOKEN_KEY)
+    LocalStorage.removeItem(SignInService.ACCESS_TOKEN_KEY)
   }
 
   return (
