@@ -11,8 +11,8 @@ function UnauthorizedPage() {
         <h1>Não autorizado</h1>
         <p>Você não possui acesso pois não está logado.</p>
         <Row className="justify-content-start p-2">
-          <Button href="/" className="mr-5 mb-3" variant="dark" bsSize="large" >Retornar para a Home</Button>
-          <Button className="mb-3" href="/sign-in" variant="dark" bsSize="large" >Fazer login</Button>
+          <Button href="/" className="mr-5 mb-3" variant="dark" size="large" >Retornar para a Home</Button>
+          <Button className="mb-3" href="/sign-in" variant="dark" size="large" >Fazer login</Button>
         </Row>
       </Jumbotron>
     </Page>
