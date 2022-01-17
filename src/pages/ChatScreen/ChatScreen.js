@@ -1,28 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { Jumbotron, InputGroup, FormControl, Button, Row, Col } from 'react-bootstrap'
 
 import { Page } from '../../Components/Page/Page'
+import { LocalStorage } from '../../Services/LocalStorageService'
+import { SignInService } from '../../Services/SignInService'
+import { WebsocketGlobalChat } from '../../Services/Websocket/GlobalChatService'
 import { ChatAnonymousMessage } from './Components/ChatAnonymousMessage'
 import { ChatUserMessage } from './Components/ChatUserMessage'
 
-function renderMessage(messageIndex, userName, messageType, message) {
-
-  switch (messageType) {
-    case 'anonymous':
-      return <ChatAnonymousMessage key={messageIndex} message={message} />
-    case 'user':
-      return <ChatUserMessage key={messageIndex} userName={userName} message={message} />
-  }
-}
 
 function ChatScreen() {
+  const [userData, setUserData] = useState(null);
+  const [message, setMessage] = useState('');
+  const [allMessages, setAllMessages] = useState([]);
 
-  const [data] = useState([
-    { userName: 'Teste', messageType: 'user', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit nec lacus luctus, aliquam blandit orci ornare. Donec vel ipsum id quam condimentum scelerisque mattis ac risus. Etiam in ipsum gravida, finibus velit vitae, mollis massa. Donec faucibus at felis sodales sagittis. In feugiat nisl auctor maximus imperdiet. Integer aliquam felis magna, ac egestas nulla blandit vel. Nunc tempus augue sit amet ligula porta molestie.' },
-    { userName: 'Teste', messageType: 'anonymous', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit nec lacus luctus, aliquam blandit orci ornare. Donec vel ipsum id quam condimentum scelerisque mattis ac risus. Etiam in ipsum gravida, finibus velit vitae, mollis massa. Donec faucibus at felis sodales sagittis. In feugiat nisl auctor maximus imperdiet. Integer aliquam felis magna, ac egestas nulla blandit vel. Nunc tempus augue sit amet ligula porta molestie.' },
-    { userName: 'Teste', messageType: 'user', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit nec lacus luctus, aliquam blandit orci ornare. Donec vel ipsum id quam condimentum scelerisque mattis ac risus. Etiam in ipsum gravida, finibus velit vitae, mollis massa. Donec faucibus at felis sodales sagittis. In feugiat nisl auctor maximus imperdiet. Integer aliquam felis magna, ac egestas nulla blandit vel. Nunc tempus augue sit amet ligula porta molestie.' },
-    { userName: 'Teste', messageType: 'anonymous', message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam porta elit nec lacus luctus, aliquam blandit orci ornare. Donec vel ipsum id quam condimentum scelerisque mattis ac risus. Etiam in ipsum gravida, finibus velit vitae, mollis massa. Donec faucibus at felis sodales sagittis. In feugiat nisl auctor maximus imperdiet. Integer aliquam felis magna, ac egestas nulla blandit vel. Nunc tempus augue sit amet ligula porta molestie.' }
-  ])
+  const chatScroll = useRef()
+  const websocketGlobalChat = useMemo(() => new WebsocketGlobalChat(), [])
+
+  function RenderMessages() {
+    return allMessages?.map(({ message, user }, i) => {
+      const isUserMessage = user._id === userData._id
+      if (isUserMessage) {
+        return <ChatUserMessage key={i} userName={user.name} message={message} />
+      } else {
+        return <ChatAnonymousMessage key={i} message={message} photo={user.photo} />
+      }
+    })
+  }
+  
+  const handleSendMessage = () => {
+    websocketGlobalChat.sendMessage(message)
+    setAllMessages(allMessages.concat({
+      message,
+      user: userData
+    }))
+    setMessage('')
+  }
+
+  const scrollChatToBottom = () => {
+    chatScroll.current?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  useEffect(() => {
+    setUserData(LocalStorage.getJSONItem(SignInService.USER_DATA_KEY))
+    websocketGlobalChat.onMessage(setAllMessages)
+  }, [])
+
+  useEffect(() => {
+    scrollChatToBottom()
+  }, [allMessages])
 
   return (
     <Page title="FlashChat">
@@ -30,16 +56,20 @@ function ChatScreen() {
         <Col md={12}>
           <Jumbotron fluid style={{ height: '60vh', overflowY: 'scroll', overflowX: 'hidden' }}>
             <Row>
-              {data?.map((msg, i) => {
-                return renderMessage(i, msg.userName, msg.messageType, msg.message)
-              })}
+              <RenderMessages />
             </Row>
+            <div ref={chatScroll}> </div>
           </Jumbotron>
         </Col>
       </Row>
       <InputGroup className="mb-3">
-        <FormControl placeholder="Digite sua mensagem" className="mr-2" />
-        <Button>Enviar</Button>
+        <FormControl
+          placeholder="Digite sua mensagem"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          className="mr-2"
+        />
+        <Button onClick={handleSendMessage}>Enviar</Button>
       </InputGroup>
     </Page>
   )
