@@ -7,10 +7,10 @@ class BaseService {
   }
 
   getBaseUrl() {
-    if (!this.baseUrl) {
-      throw new Error('Implement baseUrl in your Service Class')
+    if (!this.base_url) {
+      throw new Error('Implement base_url in your Service Class')
     }
-    return this.baseUrl
+    return this.base_url
   }
 
 }
