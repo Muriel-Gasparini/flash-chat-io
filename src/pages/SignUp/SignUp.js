@@ -1,11 +1,12 @@
 import moment from 'moment'
 import React, { useState } from 'react'
-import { Button, Col, Form, Jumbotron, Row } from 'react-bootstrap'
+import { Button, Col, Form, FormFile, FormGroup, FormLabel, Jumbotron, Row } from 'react-bootstrap'
 
 import { InputWithLabel } from '../../Components/Form/InputWithLabel'
 import { Loading } from '../../Components/Loading/Loading'
 import { Notify } from '../../Components/Notify/Notify'
 import { Page } from '../../Components/Page/Page'
+import { getInputFileAsBase64 } from '../../Services/FileSystem/dom-files'
 import { SignUpService } from '../../Services/SignUpService'
 
 function SignUp({ history }) {
@@ -35,7 +36,7 @@ function SignUp({ history }) {
     <Page title="Cadastre-se no FlashChat">
       <Jumbotron>
         <Form onSubmit={createAccount}>
-          <Row>
+          <Row className="justify-content-center">
             <Col md={6}>
               <InputWithLabel
                 label="Nome"
@@ -43,8 +44,7 @@ function SignUp({ history }) {
                 inputType="Text"
                 required
                 onChange={e => {
-                  account.name = e.target.value
-                  setAccount({ ...account })
+                  setAccount({ ...account, name: e.target.value })
                 }}
               />
             </Col>
@@ -55,8 +55,7 @@ function SignUp({ history }) {
                 inputType="Date"
                 required
                 onChange={e => {
-                  account.birthdate = moment(e.target.value, 'YYYY/MM/DD').toISOString()
-                  setAccount({ ...account })
+                  setAccount({ ...account, birthdate: moment(e.target.value, 'YYYY/MM/DD').toISOString() })
                 }}
               />
             </Col>
@@ -67,8 +66,7 @@ function SignUp({ history }) {
                 inputType="Email"
                 required
                 onChange={e => {
-                  account.email = e.target.value
-                  setAccount({ ...account })
+                  setAccount({ ...account, email: e.target.value })
                 }}
               />
             </Col>
@@ -79,10 +77,15 @@ function SignUp({ history }) {
                 inputType="Password"
                 required
                 onChange={e => {
-                  account.password = e.target.value
-                  setAccount({ ...account })
+                  setAccount({ ...account, password: e.target.value })
                 }}
               />
+            </Col>
+            <Col md={6} className="align-self-center">
+              <FormGroup>
+                <FormLabel>Foto de perfil</FormLabel>
+                <FormFile onChange={e => getInputFileAsBase64(e.target.files[0], (photo) => setAccount({ ...account, photo }))}/>
+              </FormGroup>
             </Col>
           </Row>
           <Row className="justify-content-center mt-5">
