@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class HttpService {
 
-  base_path = 'http://localhost:3001'
+  base_path = 'http://localhost:3000'
 
   async makeRequest(url, method, body = null, config) {
     try {

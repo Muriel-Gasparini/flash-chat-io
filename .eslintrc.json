@@ -8,17 +8,18 @@
         "plugin:react/recommended"
     ],
     "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": 12,
+      "sourceType": "module"
     },
     "plugins": [
-        "react"
+      "react"
     ],
     "rules": {
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "react/jsx-key": 0
     },
     "parser": "babel-eslint",
     "settings": {

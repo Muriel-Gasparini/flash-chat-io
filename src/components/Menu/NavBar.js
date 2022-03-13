@@ -10,7 +10,7 @@ function MenuNavBar() {
   const { isAuthenticated } = useAuth()
 
   const MenuButton = ({ href, variant, text, hidden, onClick }) => {
-    return <Button onClick={onClick} hidden={hidden} className="ml-3" href={href} variant={variant}>{text}</Button>
+    return <Button  onClick={onClick} hidden={hidden} className="ml-3" href={href} variant={variant}>{text}</Button>
   }
 
   const signOut = () => {
