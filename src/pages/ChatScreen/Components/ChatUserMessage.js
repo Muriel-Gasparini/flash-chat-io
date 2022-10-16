@@ -1,16 +1,23 @@
-import React from 'react'
-import { Card, Col } from 'react-bootstrap'
+import React, { memo } from 'react'
+import { Card, Col, Row } from 'react-bootstrap'
 
-function ChatUserMessage({ message }) {
+function ChatUserMessage({ message, date }) {
   return (
-    <Col md={{ span: 8, offset: 4 }} sm={{ span: 11, offset: 1 }} xs={{ span: 11, offset: 1 }} className="pr-5 mb-3 justify-self-end">
-      <Card bg="dark" text="light">
-        <Card.Text className="p-2">
-          {message}
+    <Row className="w-100 justify-content-end mb-2 mt-2 ml-1">
+      <Col xs={12} className="d-flex justify-content-end">
+        <Card bg="dark" text="light" className='d-inline-block text-wrap'>
+          <Card.Text className="p-2">
+            {message}
+          </Card.Text>
+        </Card>
+      </Col>
+      <Col xs={12}>
+        <Card.Text className="text-right">
+          {date}
         </Card.Text>
-      </Card>
-    </Col>
+      </Col>
+    </Row>
   )
 }
 
-export { ChatUserMessage }
+export default memo(ChatUserMessage)

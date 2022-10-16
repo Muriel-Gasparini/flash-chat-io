@@ -2,7 +2,7 @@ import axios from 'axios'
 
 class HttpService {
 
-  base_path = 'http://localhost:3000'
+  base_path = process.env.HTTP_URL || 'https://66cb-45-235-53-71.ngrok.io'
 
   async makeRequest(url, method, body = null, config) {
     try {

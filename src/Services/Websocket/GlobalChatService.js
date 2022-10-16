@@ -13,15 +13,25 @@ class WebsocketGlobalChat extends WebsocketManager {
   }
 
   channels = {
-    chat: 'chat'
+    retrieveMessages: 'retrieve_messages',
+    send: 'send',
+    newMessage: 'new_message'
   }
 
   sendMessage(message) {
-    this.socket.emit(this.channels.chat, message)
+    this.socket.emit(this.channels.send, message)
+  }
+
+  onRetrieveMessages(callback) {
+    this.socket.on(this.channels.retrieveMessages, callback)
   }
 
   onMessage(callback) {
-    this.socket.on(this.channels.chat, callback)
+    this.socket.on(this.channels.newMessage, callback)
+  }
+
+  removeOnMessageListerners() {
+    this.socket.removeAllListeners(this.channels.newMessage)
   }
 }
 

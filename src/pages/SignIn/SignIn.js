@@ -29,8 +29,8 @@ function SignIn({ history }) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
       const userData = await signInService.getUserInformation();
-
-      LocalStorage.setJSONItem(SignInService.USER_DATA_KEY, userData)
+//console.log("ASAPOS", userData)
+      LocalStorage.setJSONItem(SignInService.USER_DATA_KEY, userData.user)
       LocalStorage.setItem(SignInService.ACCESS_TOKEN_KEY, token)
 
       setIsAuthenticated(true)

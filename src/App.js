@@ -3,7 +3,6 @@ import { ToastContainer } from 'react-toastify'
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 import './styles/App.scss';
 
-
 import { MenuNavBar } from './Components/Menu/NavBar'
 import { AuthProvider } from './Pages/SignIn/SignInContext'
 import { ALL_ROUTES } from './Routes/routes'
